@@ -1,4 +1,4 @@
-import {createApp, mount} from 'vue';
+import {createApp, mount, use} from 'vue';
 
 import router from './router';
 import store from './store';
@@ -12,5 +12,6 @@ import App from './App.vue';
 //   render: (h) => h(App),
 // }).$mount('#app');
 
-const app = createApp(App).mount('#app');
+const app = createApp(App);
 app.use(store, router);
+app.mount('#app');

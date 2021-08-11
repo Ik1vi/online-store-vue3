@@ -1,26 +1,74 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <CookieInfo
+      v-show="isCookieBlock"
+      v-model:is-cookie-block="isCookieBlock"
+    />
+    <AppHeader />
+
+    <router-view />
+
+    <AppFooter />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapMutations, mapActions } from 'vuex';
+
+import AppFooter from '@/components/AppFooter.vue';
+import AppHeader from '@/components/AppHeader.vue';
+import CookieInfo from '@/components/CookieInfo.vue';
 
 export default {
-  name: 'App',
+  data() {
+    return {
+      isCookieBlock: true,
+    };
+  },
   components: {
-    HelloWorld
-  }
-}
+    AppFooter,
+    AppHeader,
+    CookieInfo,
+  },
+  created() {
+    const accessKey = this.getCookie('userAccessKey');
+    const rejectData = localStorage.getItem('rejectData');
+    const cookieBlockFirstTime = localStorage.getItem('cookieBlockFirstTime');
+    if (cookieBlockFirstTime) {
+      if (accessKey) {
+        this.updateUserAccessKey(accessKey);
+        this.isCookieBlock = false;
+      } else if (rejectData) {
+        this.getAccessKey();
+        if (rejectData !== new Date().toLocaleDateString()) {
+          this.isCookieBlock = true;
+        } else if (rejectData === new Date().toLocaleDateString()) {
+          this.isCookieBlock = false;
+        }
+      } else {
+        this.getAccessKey();
+      }
+    } else {
+      localStorage.setItem('cookieBlockFirstTime', 'true');
+      this.isCookieBlock = true;
+      this.getAccessKey();
+    }
+    this.loadCart();
+  },
+  methods: {
+    ...mapMutations(['updateUserAccessKey']),
+    ...mapActions('cart', {
+      loadCart: 'loadCart',
+      getAccessKey: 'getAccessKey',
+    }),
+    getCookie(name) {
+      const cookie = {};
+      document.cookie.split(';').forEach((el) => {
+        const [k, v] = el.split('=');
+        cookie[k.trim()] = v;
+      });
+      return cookie[name];
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

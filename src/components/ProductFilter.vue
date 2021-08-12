@@ -42,7 +42,6 @@
           <select
             v-model.number="currentCategoryId"
             class="form__select"
-            type="text"
             name="category"
           >
             <option value="0">Все категории</option>

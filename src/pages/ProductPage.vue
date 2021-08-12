@@ -16,7 +16,7 @@
           >
             <router-link
               class="breadcrumbs__link"
-              :to="{name: 'main'}"
+              to="/"
             >
               Каталог
             </router-link>
@@ -27,7 +27,7 @@
           >
             <router-link
               class="breadcrumbs__link"
-              :to="{name: 'main'}"
+              to="/"
             >
               {{category.title}}
             </router-link>

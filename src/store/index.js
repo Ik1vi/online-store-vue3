@@ -4,7 +4,7 @@ import order from './modules/order';
 import cart from './modules/cart';
 
 const store = createStore({
-  plugins: [createLogger()],
+  // plugins: [createLogger()],
   modules: {
     order,
     cart,

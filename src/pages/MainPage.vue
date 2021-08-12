@@ -56,7 +56,6 @@
             <select
               v-model.number="productsPerPage"
               class="catalog__select"
-              type="text"
               name="productsPerPage"
             >
               <option>12</option>

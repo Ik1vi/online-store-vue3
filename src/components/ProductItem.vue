@@ -44,7 +44,6 @@
       <label class="catalog__label catalog__label--select">
         <select
           class="catalog__select"
-          type="text"
           name="prop"
           v-model="currentOfferPropId"
         >

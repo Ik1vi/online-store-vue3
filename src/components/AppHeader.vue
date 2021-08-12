@@ -3,15 +3,14 @@
       <div class="header__wrapper container">
         <router-link
           class="header__info"
-          :to="{name: 'main'}"
+          to="/"
         >
           Каталог
         </router-link>
 
         <router-link
           class="header__logo"
-          href="#"
-          :to="{name: 'main'}"
+          to="/"
         >
           <img
             src="img/svg/logo-tech.svg"

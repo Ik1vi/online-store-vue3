@@ -3,12 +3,12 @@
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
-          <router-link class="breadcrumbs__link" :to="{name: 'main'}">
+          <router-link class="breadcrumbs__link" to="/">
             Каталог
           </router-link>
         </li>
         <li class="breadcrumbs__item">
-          <router-link class="breadcrumbs__link" :to="{name: 'cart'}">
+          <router-link class="breadcrumbs__link" to="/cart">
             Корзина
           </router-link>
         </li>
